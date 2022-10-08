@@ -1,4 +1,4 @@
-Shader "Mine/Rim"
+Shader "Mine/DotProduct/Rim"
 {
     Properties
     {

@@ -1,4 +1,4 @@
-Shader "Mine/Cutoff1"
+Shader "Mine/DotProduct/CutoffWithDiffuse"
 {
     Properties
     {

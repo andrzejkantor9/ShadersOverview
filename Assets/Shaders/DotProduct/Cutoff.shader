@@ -1,4 +1,4 @@
-Shader "Mine/Cutoff"
+Shader "Mine/DotProduct/Cutoff"
 {
 
     SubShader
