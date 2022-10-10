@@ -1,4 +1,4 @@
-Shader "Mine/DotProduct/Rim"
+Shader "Mine/PassesAndBlending/Hologram"
 {
     Properties
     {
@@ -8,8 +8,20 @@ Shader "Mine/DotProduct/Rim"
 
     SubShader
     {
+        Tags
+        {
+            "Queue" = "Transparent"
+        }
+
+        Pass
+        {
+            ZWrite On
+            // ColorMask RGB
+            ColorMask 0
+        }
+
         CGPROGRAM
-            #pragma surface surf Lambert
+            #pragma surface surf Lambert alpha:fade
 
             struct Input
             {
@@ -21,10 +33,11 @@ Shader "Mine/DotProduct/Rim"
 
             void surf (Input IN, inout SurfaceOutput o)
             {
-                // half rim = dot(normalize(IN.viewDir), o.Normal);
                 half rim = 1 - saturate(dot(normalize(IN.viewDir), o.Normal));
-                // o.Emission = _RimColor.rgb * rim;
-                o.Emission = _RimColor.rgb * pow(rim, _RimPower) * 10;
+                half rimPower = pow(rim, _RimPower);
+                o.Emission = _RimColor.rgb * rimPower * 10;
+
+                o.Alpha = rimPower;
             }
         ENDCG
     }
